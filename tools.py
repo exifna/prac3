@@ -49,11 +49,18 @@ class Table:                # поле
             x = x2 - x1
             y = -(y2 - y1)
 
-            if not x + y:
-                return False
+            # if not x + y:
+            #     return False
 
             if not x and not y:
                 return False
+
+            if self.table[y1][x1].isWhite != isWhite:
+                    return False
+
+            if self.table[y2][x2]:
+                if self.table[y2][x2].isWhite == isWhite:
+                    return False
 
             if figura.figura_type == Figura_types.peshka:   # проверка: если 1й ход - то только 2 прямо если 2е - то только 1 вперед если есть кто-то, то
                 if isWhite:
@@ -114,9 +121,6 @@ class Table:                # поле
                     return True
 
             elif figura.figura_type == Figura_types.qeen:
-                if self.table[y2][x2]:
-                    if self.table[y2][x2].isWhite == isWhite:
-                        return False
 
                 if abs(x) != abs(y) and x * y != 0:
                     return False
@@ -149,7 +153,9 @@ class Table:                # поле
                 if not self.table[y2][x2]:
                     return True
 
-            elif figura
+            elif figura.figura_type == Figura_types.king:
+
+                return not bool(x*y > 1)
 
             '''
 C2 -> C4
@@ -157,12 +163,42 @@ D7 -> D5
 D1 -> B3
 D8 -> D6
 B3 -> B6
-крашится
+D6 -> B6
+E1 -> D1
+E8 -> D7
+
+
             '''
             return False
 
         except:
             return False
+
+    def check_mat(self):
+        kings = 0
+        for i in self.table:
+            for ii in i:
+                if ii:
+                    if ii.figura_type == Figura_types.king:
+                        kings += 1
+        return kings != 2
+
+    def who_win(self):
+        black = False
+        white = False
+        for i in self.table:
+            for ii in i:
+                if ii:
+                    if ii.figura_type == Figura_types.king:
+                        if ii.isWhite:
+                            white = True
+                        else:
+                            black = True
+        if not black:
+            return 'чёрные'
+
+        if not white:
+            return 'белые'
 
     def move_by_letters(self, first_place : str, second_place : str):
         try:
@@ -179,7 +215,7 @@ B3 -> B6
         try:
             self.table[8- y1][x1 -1].steps += 1
             if self.table[8 - y2][x2 - 1]:
-                self.event_list.append(f'! {"белые" if self.table[8- y1][x1 -1].isWhite else "чёрные"} съедают!')
+                self.event_list.append(f'{color.UNDERLINE}{color.BOLD}{"БЕЛЫЕ" if self.table[8- y1][x1 -1].isWhite else "ЧЁРНЫЕ"} съедают.{color.END}')
             self.table[8 - y2][x2 - 1] = self.table[8- y1][x1 -1]
             self.table[8 -y1][x1 - 1] = None
         except:

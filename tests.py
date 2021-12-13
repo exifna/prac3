@@ -17,6 +17,8 @@ while True:
             table.move_by_letters(locale1, locale2)
             isWhite = not isWhite
     table.clear()
+    if table.check_mat():
+        exit(f'\n\nИгра завершена! Победила дружба ({table.who_win()})')
     table.print_table()
 
 
