@@ -158,14 +158,16 @@ class Table:                # поле
                 return not bool(x*y > 1)
 
             '''
-C2 -> C4
-D7 -> D5
-D1 -> B3
-D8 -> D6
-B3 -> B6
-D6 -> B6
-E1 -> D1
-E8 -> D7
+E2 E4
+D7 D5
+E4 D5
+G8 F6
+D1 H5
+F6 H5
+F1 B5
+H5 F4
+E1 E2
+F4 E2
 
 
             '''
@@ -195,10 +197,10 @@ E8 -> D7
                         else:
                             black = True
         if not black:
-            return 'чёрные'
+            return 'белые'
 
         if not white:
-            return 'белые'
+            return 'чёрные'
 
     def move_by_letters(self, first_place : str, second_place : str):
         try:
