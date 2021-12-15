@@ -157,20 +157,6 @@ class Table:                # поле
 
                 return not bool(x*y > 1)
 
-            '''
-E2 E4
-D7 D5
-E4 D5
-G8 F6
-D1 H5
-F6 H5
-F1 B5
-H5 F4
-E1 E2
-F4 E2
-
-
-            '''
             return False
 
         except:
