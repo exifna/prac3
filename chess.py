@@ -1,6 +1,5 @@
 import time
 from math import ceil
-
 from tools import Table, color
 import inputimeout
 
